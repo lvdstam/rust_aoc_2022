@@ -17,9 +17,9 @@ fn main() {
                 .iter().map(|calories| calories.iter().sum::<i32>())
                 .collect::<Vec<_>>();
 
-            println!("{}", calories.iter().max().unwrap());
             calories.sort();
             calories.reverse();
+            println!("{}", calories.iter().take(1).sum::<i32>());
             println!("{}", calories.iter().take(3).sum::<i32>())
         },
         Err(_) => println!("Error opening the input file!"),
