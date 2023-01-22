@@ -1,27 +1,19 @@
-use std::fs::File;
-use std::io::{BufRead, BufReader};
+mod day_01;
+mod day_02;
 
-fn main() {
-    let filename = "inputs/input_day_01.txt";
+use std::collections::HashSet;
+use day_01::day_01;
+use day_02::day_02;
 
-    match File::open(filename) {
-        Ok(file) => {
-            let reader = BufReader::new(file);
-            let mut calories = reader
-                .lines()
-                .map(|line| if let Ok(l) = line {l.parse::<i32>().ok()} else {Option::None})
-                .collect::<Vec<_>>()
-                .split(|line| line.is_none())
-                .map(|somes| somes.iter().map(|some| some.unwrap()).collect::<Vec<_>>())
-                .collect::<Vec<_>>()
-                .iter().map(|calories| calories.iter().sum::<i32>())
-                .collect::<Vec<_>>();
+ fn main() {
+    let mut days:HashSet<i32> = HashSet::new();
+    // days.insert(1);
+    days.insert(2);
 
-            calories.sort();
-            calories.reverse();
-            println!("{}", calories.iter().take(1).sum::<i32>());
-            println!("{}", calories.iter().take(3).sum::<i32>())
-        },
-        Err(_) => println!("Error opening the input file!"),
-    };
+    if days.contains(&1) {
+        day_01();
+    }
+    if days.contains(&2) {
+        day_02();
+    }
 }
